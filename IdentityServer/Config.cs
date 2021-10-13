@@ -1,12 +1,9 @@
 ﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
-using IdentityServer4;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace IdentityServer
 {
@@ -75,10 +72,7 @@ namespace IdentityServer
               new IdentityResources.Profile(),
               new IdentityResources.Address(),
               new IdentityResources.Email(),
-              new IdentityResource(
-                    "roles",
-                    "Your role(s)",
-                    new List<string>() { "role" })
+              new IdentityResource("roles", "Your role(s)", new List<string>() { "role" })
           };
 
         public static List<TestUser> TestUsers =>
@@ -87,12 +81,12 @@ namespace IdentityServer
                 new TestUser
                 {
                     SubjectId = "5BE86359-073C-434B-AD2D-A3932222DABE",
-                    Username = "mehmet",
+                    Username = "youssef",
                     Password = "swn",
                     Claims = new List<Claim>
                     {
-                        new Claim(JwtClaimTypes.GivenName, "mehmet"),
-                        new Claim(JwtClaimTypes.FamilyName, "ozkaya")
+                        new Claim(JwtClaimTypes.GivenName, "youssef"),
+                        new Claim(JwtClaimTypes.FamilyName, "wael")
                     }
                 }
             };
