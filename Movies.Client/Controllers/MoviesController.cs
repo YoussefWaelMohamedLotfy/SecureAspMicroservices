@@ -28,6 +28,7 @@ namespace Movies.Client.Controllers
             await LogTokenAndClaims();
             return View(await _movieApiService.GetMovies());
         }
+
         public async Task LogTokenAndClaims()
         {
             var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
