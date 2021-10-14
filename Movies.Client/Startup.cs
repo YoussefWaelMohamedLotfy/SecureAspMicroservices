@@ -62,11 +62,10 @@ namespace Movies.Client
                     options.ClientSecret = "secret";
                     options.ResponseType = "code id_token";
 
-                    //options.Scope.Add("openid");
-                    //options.Scope.Add("profile");
                     options.Scope.Add("address");
                     options.Scope.Add("email");
                     options.Scope.Add("roles");
+                    options.Scope.Add("movieAPI");
 
                     options.ClaimActions.DeleteClaim("sid");
                     options.ClaimActions.DeleteClaim("idp");
@@ -74,7 +73,6 @@ namespace Movies.Client
                     options.ClaimActions.DeleteClaim("auth_time");
                     options.ClaimActions.MapUniqueJsonKey("role", "role");
 
-                    options.Scope.Add("movieAPI");
 
                     options.SaveTokens = true;
                     options.GetClaimsFromUserInfoEndpoint = true;

@@ -25,23 +25,17 @@ namespace Movies.Client.ApiServices
 
         public async Task<IEnumerable<Movie>> GetMovies()
         {
-
-            ////////////////////////
             // WAY 1 :
-
             var httpClient = _httpClientFactory.CreateClient("MovieAPIClient");
-
             var request = new HttpRequestMessage(HttpMethod.Get, "/movies");
-
             var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
             var movieList = JsonConvert.DeserializeObject<List<Movie>>(content);
             return movieList;
 
-            ////////////////////////// //////////////////////// ////////////////////////
+            //---------------------------------------------------------------------------------------------
             //// WAY 2 :
 
             //// 1. "retrieve" our api credentials. This must be registered on Identity Server!
@@ -87,8 +81,6 @@ namespace Movies.Client.ApiServices
 
             //var movieList = JsonConvert.DeserializeObject<List<Movie>>(content);
             //return movieList;
-
-
         }
 
         public Task<Movie> GetMovie(string id)
@@ -114,17 +106,12 @@ namespace Movies.Client.ApiServices
         public async Task<UserInfoViewModel> GetUserInfo()
         {
             var idpClient = _httpClientFactory.CreateClient("IDPClient");
-
             var metaDataResponse = await idpClient.GetDiscoveryDocumentAsync();
 
             if (metaDataResponse.IsError)
-            {
                 throw new HttpRequestException("Something went wrong while requesting the access token");
-            }
 
-            var accessToken = await _httpContextAccessor
-                .HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
-
+            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
             var userInfoResponse = await idpClient.GetUserInfoAsync(
                new UserInfoRequest
                {
@@ -133,9 +120,7 @@ namespace Movies.Client.ApiServices
                });
 
             if (userInfoResponse.IsError)
-            {
                 throw new HttpRequestException("Something went wrong while getting user info");
-            }
 
             var userInfoDictionary = new Dictionary<string, string>();
 
