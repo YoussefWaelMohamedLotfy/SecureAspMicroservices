@@ -7,10 +7,10 @@ namespace Movies.Client.ApiServices
     public interface IMovieApiService
     {
         Task<IEnumerable<Movie>> GetMovies();
-        Task<Movie> GetMovie(string id);
-        Task<Movie> CreateMovie(Movie movie);
-        Task<Movie> UpdateMovie(Movie movie);
-        Task DeleteMovie(int id);
+        Task<Movie> GetMovie(int id);
+        Task<bool> CreateMovie(Movie movie);
+        Task<bool> UpdateMovie(int id, Movie movie);
+        Task<bool> DeleteMovie(int id);
         Task<UserInfoViewModel> GetUserInfo();
     }
 }
