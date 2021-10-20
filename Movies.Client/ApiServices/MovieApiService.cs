@@ -89,7 +89,7 @@ namespace Movies.Client.ApiServices
 
         private async Task<T> Execute<T>(HttpMethod method, string uri, T data)
         {
-            var httpClient = _httpClientFactory.CreateClient("MovieApiClient");
+            var httpClient = _httpClientFactory.CreateClient("MovieAPIClient");
 
             var request = new HttpRequestMessage(method, uri);
 

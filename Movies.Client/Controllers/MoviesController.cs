@@ -9,6 +9,7 @@ using Movies.Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Movies.Client.Controllers
@@ -26,14 +27,16 @@ namespace Movies.Client.Controllers
         // GET: Movies
         public async Task<IActionResult> Index()
         {
+            var movies = await _movieApiService.GetMovies();
+            movies = FilterMovies(movies.ToList());
+
             await LogTokenAndClaims();
-            return View(await _movieApiService.GetMovies());
+            return View(movies);
         }
 
         public async Task LogTokenAndClaims()
         {
             var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
-
             Debug.WriteLine($"Identity token: {identityToken}");
 
             foreach (var claim in User.Claims)

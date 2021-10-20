@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Movies.API.Data;
+using System.Reflection.Metadata;
 
 namespace Movies.API
 {
@@ -23,8 +24,7 @@ namespace Movies.API
         {
             services.AddControllers();
 
-            services.AddDbContext<MoviesContext>(options =>
-                                options.UseInMemoryDatabase("Movies"));
+            services.AddDbContext<MoviesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieClientDb")));
 
             services.AddAuthentication("Bearer")
                     .AddJwtBearer("Bearer", options =>

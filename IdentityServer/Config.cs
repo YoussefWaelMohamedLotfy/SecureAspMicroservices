@@ -1,9 +1,6 @@
-﻿using IdentityModel;
-using IdentityServer4;
+﻿using IdentityServer4;
 using IdentityServer4.Models;
-using IdentityServer4.Test;
 using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace IdentityServer
 {
@@ -74,21 +71,5 @@ namespace IdentityServer
               new IdentityResources.Email(),
               new IdentityResource("roles", "Your role(s)", new List<string>() { "role" })
           };
-
-        public static List<TestUser> TestUsers =>
-            new List<TestUser>
-            {
-                new TestUser
-                {
-                    SubjectId = "5BE86359-073C-434B-AD2D-A3932222DABE",
-                    Username = "youssef",
-                    Password = "swn",
-                    Claims = new List<Claim>
-                    {
-                        new Claim(JwtClaimTypes.GivenName, "youssef"),
-                        new Claim(JwtClaimTypes.FamilyName, "wael")
-                    }
-                }
-            };
     }
 }
